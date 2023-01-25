@@ -1,8 +1,9 @@
 //added an image opener using pyIMG
 from Tkinter import*
 import PyPDF2
-import PyIMG2
 from PIL import Image, ImageTk
+from tkinter import filedialog
+from PIL import Image
 from tkinter.filedialog import askopenfile
 
 root = tk.Tk()
@@ -28,13 +29,7 @@ def open_file():
         read_pdf = PyPDF2.PdfFileReader(file)
         page = read_pdf.getPage(0)
         page_content = page.extractText()
-    browse_text.set("wait...")
-    file = askopenfile(parent=root, mode='rb', title="Choose a file", filetypes=[("Image File", "*.jpg")])
-    if file:
-        read_image = PyIMG2.ImgFileReader(file)
-        page = read_img.getPage(0)
-        page_content = page.extractText()
-
+   
         #text box
         text_box = tk.Text(root, height=10, width=50, padx=15, pady=15)
         text_box.insert(1.0, page_content)
@@ -43,6 +38,18 @@ def open_file():
         text_box.grid(column=1, row=3)
 
         browse_text.set("Click Here to Open Files")
+
+#extracting image gui         
+def extract_images():
+    # open file dialog
+    filepath = filedialog.askopenfilename()
+    
+    # use pil to open selected path
+    with Image.open(filepath) as im:
+        # render image frames
+        for i, frame in enumerate(ImageSequence.Iterator(im)):
+            # seperate the file frames
+            frame.save(f"frame{i}.png")
 
 #browse button
 browse_text = tk.StringVar()
