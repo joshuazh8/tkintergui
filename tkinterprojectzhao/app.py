@@ -3,6 +3,11 @@
 # APCSP P1
 #2/2/23
 
+#added attribute: added a copy button so that when pressed, text will get copied onto clipboard for pasting.
+# Zhaohua Zhang 132
+# APCSP P1
+#2/2/23
+
 import tkinter as tk
 import PyPDF2
 from PIL import Image, ImageTk
@@ -44,14 +49,14 @@ def open_file():
             text_box.tag_add("sel", "1.0", "end")
             text_box.event_generate("<<Copy>>")
 
-        copy_text_btn = tk.Button(root, text="Copy Text", command=lambda:copy_text(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
+        copy_text_btn = tk.Button(root, text="Copy Text", command=lambda:copy_text(), font="Raleway", bg="#20bebe", fg="black", height=2, width=15)
         copy_text_btn.grid(column=2, row=3)
 
         browse_text.set("Browse")
 
 #browse button
 browse_text = tk.StringVar()
-browse_btn = tk.Button(root, textvariable=browse_text, command=lambda:open_file(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
+browse_btn = tk.Button(root, textvariable=browse_text, command=lambda:open_file(), font="Raleway", bg="#20bebe", fg="black", height=2, width=15)
 browse_text.set("Browse")
 browse_btn.grid(column=1, row=2)
 
@@ -59,3 +64,4 @@ canvas = tk.Canvas(root, width=600, height=250)
 canvas.grid(columnspan=3)
 
 root.mainloop()
+
